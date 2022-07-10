@@ -12,7 +12,7 @@ const productSchema = mongoose.Schema({
     },
     price:{
         type:Number,
-        require: [true,"Please Enter Product Price"],
+        required: [true,"Please Enter Product Price"],
         maxLength: [8,"Price cannot exceed 8 characters"]
     },
     rating:{
@@ -33,7 +33,7 @@ const productSchema = mongoose.Schema({
     ],
     category:{
         type:String,
-        require:[true,"Please Enter Product Category"]
+        required:[true,"Please Enter Product Category"]
     },
     Stock:{
         type:Number,
@@ -49,7 +49,7 @@ const productSchema = mongoose.Schema({
         {
             name:{
                 type:String,
-                require:true
+                required:true
             },
             rating:{
                 type:Number,
