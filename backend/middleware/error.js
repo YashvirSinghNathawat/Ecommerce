@@ -10,7 +10,6 @@ module.exports = (err, req, res, next) => {
     err = new ErrorHandler(message, 400);
   }
 
-  console.log(err.index);
   // Mongoose duplicate key error
   if (err.code === 11000) {
     const message = `Duplicate Email Entered`;
