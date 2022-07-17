@@ -72,11 +72,14 @@
   margin: 2vmax;
   color: rgb(48, 48, 48);
   transition: all 0.5s;
-  padding-bottom: 0.5vmax;
+  padding: 0.5vmax;
+  border-radius: 1vmax;
+  background-color: #fafafa;
 }
 
 .productCard > img {
   width: 14vmax;
+  height: 10vmax;
 }
 .productCard > div {
   margin: 0.5vmax;
