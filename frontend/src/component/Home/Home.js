@@ -10,9 +10,7 @@ import { useAlert } from "react-alert";
 const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();
-  const { loading, error, products, productsCount } = useSelector(
-    (state) => state.products
-  );
+  const { loading, error, products } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (error) {
@@ -28,7 +26,7 @@ const Home = () => {
       ) : (
         <Fragment>
           {/* Fragment same as <></> */}
-          <MetaData title="ECommerce" />
+          <MetaData title="GAME STORE" />
           <div className="banner">
             <p>Welcome to Ecommerce</p>
             <h1>FIND AMAZING PRODUCTS BELOW</h1>
@@ -42,7 +40,9 @@ const Home = () => {
           <h2 className="homeHeading">Featured Products</h2>
           <div className="container" id="container">
             {products &&
-              products.map((product) => <ProductCard product={product} />)}
+              products.map((product) => (
+                <ProductCard key={product} product={product} />
+              ))}
           </div>
         </Fragment>
       )}
