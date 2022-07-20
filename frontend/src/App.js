@@ -10,12 +10,15 @@ import Products from "./component/Product/Products.js";
 import Search from "./component/Product/Search.js";
 import LoginSignUp from "./component/User/LoginSignUp";
 import Profile from "./component/User/Profile.js";
+import UpdateProfile from "./component/User/UpdateProfile.js";
 import store from "./store";
 import UserOptions from "./component/layout/Header/UserOptions.js";
 import { loadUser } from "./actions/userAction";
 import { useSelector } from "react-redux";
+import ProtectedRoute from "./component/Route/ProtectedRoute";
+
 function App() {
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated, user, loading } = useSelector((state) => state.user);
 
   React.useEffect(() => {
     WebFont.load({
@@ -36,7 +39,11 @@ function App() {
         <Route exact path="/products" element={<Products />} />
         <Route path="/products/:keyword" element={<Products />} />
         <Route exact path="/search" element={<Search />} />
-        <Route exact path="/account" element={<Profile />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route exact path="/account" element={<Profile />} />
+          <Route exact path="/me/update" element={<UpdateProfile />} />
+        </Route>
         <Route exact path="/login" element={<LoginSignUp />} />
       </Routes>
       <Footer />
