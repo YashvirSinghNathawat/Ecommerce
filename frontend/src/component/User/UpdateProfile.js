@@ -4,7 +4,7 @@ import Loader from "../layout/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import FaceIcon from "@material-ui/icons/Face";
-import MetaData from "../layout/metadata";
+import MetaData from "../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, loadUser, updateProfile } from "../../actions/userAction";
 import { useAlert } from "react-alert";

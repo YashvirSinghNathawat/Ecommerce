@@ -3,7 +3,7 @@ import "./UpdatePassword.css";
 import Loader from "../layout/Loader/Loader";
 import { useNavigate } from "react-router-dom";
 
-import MetaData from "../layout/metadata";
+import MetaData from "../layout/MetaData";
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, updatePassword } from "../../actions/userAction";
 import { useAlert } from "react-alert";
