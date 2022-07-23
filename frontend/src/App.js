@@ -21,6 +21,7 @@ import Cart from "./component/Cart/Cart.js";
 import OrderSuccess from "./component/Cart/OrderSuccess.js";
 import MyOrders from "./component/Order/MyOrders.js";
 import OrderDetails from "./component/Order/OrderDetails.js";
+import Dashboard from "./component/admin/Dashboard.js";
 
 import store from "./store";
 import UserOptions from "./component/layout/Header/UserOptions.js";
@@ -32,7 +33,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
 function App() {
-  const { isAuthenticated, user } = useSelector((state) => state.user);
+  const { isAuthenticated, user, loading } = useSelector((state) => state.user);
 
   const [stripeApiKey, setStripeApiKey] = useState("");
   const [stripePromise, setStripePromise] = useState(loadStripe(stripeApiKey));
@@ -71,19 +72,36 @@ function App() {
             element={<ResetPassword />}
           />
           <Route exact path="/login" element={<LoginSignUp />} />
-          <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
-            <Route exact path="/account" element={<Profile />} />
-            <Route exact path="/me/update" element={<UpdateProfile />} />
-            <Route exact path="/password/update" element={<UpdatePassword />} />
-            <Route exact path="/shipping" element={<Shipping />} />
-            {stripePromise && (
-              <Route exact path="/order/confirm" element={<ConfirmOrder />} />
-            )}
-            <Route exact path="/process/payment" element={<Payment />}></Route>
-            <Route exact path="/success" element={<OrderSuccess />}></Route>
-            <Route exact path="/orders" element={<MyOrders />}></Route>
-            <Route exact path="/order/:id" element={<OrderDetails />}></Route>
-          </Route>
+          {loading === false && (
+            <Route element={<ProtectedRoute />}>
+              <Route exact path="/account" element={<Profile />} />
+              <Route exact path="/me/update" element={<UpdateProfile />} />
+              <Route
+                exact
+                path="/password/update"
+                element={<UpdatePassword />}
+              />
+              <Route exact path="/shipping" element={<Shipping />} />
+              {stripePromise && (
+                <Route exact path="/order/confirm" element={<ConfirmOrder />} />
+              )}
+              <Route
+                exact
+                path="/process/payment"
+                element={<Payment />}
+              ></Route>
+              <Route exact path="/success" element={<OrderSuccess />}></Route>
+              <Route exact path="/orders" element={<MyOrders />}></Route>
+              <Route exact path="/order/:id" element={<OrderDetails />}></Route>
+
+              {/* Admin Routes */}
+              <Route
+                exact
+                path="/admin/dashboard"
+                element={<Dashboard />}
+              ></Route>
+            </Route>
+          )}
         </Routes>
       </Elements>
       <Footer />
