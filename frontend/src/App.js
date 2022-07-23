@@ -19,6 +19,9 @@ import Shipping from "./component/Cart/Shipping.js";
 import Payment from "./component/Cart/Payment.js";
 import Cart from "./component/Cart/Cart.js";
 import OrderSuccess from "./component/Cart/OrderSuccess.js";
+import MyOrders from "./component/Order/MyOrders.js";
+import OrderDetails from "./component/Order/OrderDetails.js";
+
 import store from "./store";
 import UserOptions from "./component/layout/Header/UserOptions.js";
 import { loadUser } from "./actions/userAction";
@@ -32,7 +35,8 @@ function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const [stripeApiKey, setStripeApiKey] = useState("");
-  const stripePromise = loadStripe(stripeApiKey);
+  const [stripePromise, setStripePromise] = useState(loadStripe(stripeApiKey));
+
   async function getStripeApiKey() {
     const { data } = await axios.get("/api/v1/stripeapikey");
     setStripeApiKey(data.stripeApiKey);
@@ -67,7 +71,7 @@ function App() {
             element={<ResetPassword />}
           />
           <Route exact path="/login" element={<LoginSignUp />} />
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
             <Route exact path="/account" element={<Profile />} />
             <Route exact path="/me/update" element={<UpdateProfile />} />
             <Route exact path="/password/update" element={<UpdatePassword />} />
@@ -77,6 +81,8 @@ function App() {
             )}
             <Route exact path="/process/payment" element={<Payment />}></Route>
             <Route exact path="/success" element={<OrderSuccess />}></Route>
+            <Route exact path="/orders" element={<MyOrders />}></Route>
+            <Route exact path="/order/:id" element={<OrderDetails />}></Route>
           </Route>
         </Routes>
       </Elements>
