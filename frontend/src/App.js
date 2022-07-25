@@ -34,12 +34,13 @@ import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import NewProduct from "./component/Admin/NewProduct";
+import OrderList from "./component/Admin/OrderList";
+import ProcessOrder from "./component/Admin/ProcessOrder";
 
 function App() {
   const { isAuthenticated, user, loading } = useSelector((state) => state.user);
 
   const [stripeApiKey, setStripeApiKey] = useState("");
-  const [stripePromise, setStripePromise] = useState(loadStripe(stripeApiKey));
 
   async function getStripeApiKey() {
     const { data } = await axios.get("/api/v1/stripeapikey");
@@ -60,70 +61,81 @@ function App() {
     <Router>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
-      <Elements stripe={stripePromise}>
-        {loading === false && (
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/product/:id" element={<ProductDetails />} />
-            <Route exact path="/products" element={<Products />} />
-            <Route path="/products/:keyword" element={<Products />} />
-            <Route exact path="/search" element={<Search />} />
-            <Route exact path="/password/forgot" element={<ForgotPassword />} />
-            <Route exact path="/cart" element={<Cart />} />
-            <Route
-              exact
-              path="/password/reset/:token"
-              element={<ResetPassword />}
-            />
-            <Route exact path="/login" element={<LoginSignUp />} />
 
-            <Route element={<ProtectedRoute isAdmin={false} />}>
-              <Route exact path="/account" element={<Profile />} />
-              <Route exact path="/me/update" element={<UpdateProfile />} />
-              <Route
-                exact
-                path="/password/update"
-                element={<UpdatePassword />}
-              />
-              <Route exact path="/shipping" element={<Shipping />} />
-              {stripePromise && (
-                <Route exact path="/order/confirm" element={<ConfirmOrder />} />
-              )}
+      {loading === false && (
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/product/:id" element={<ProductDetails />} />
+          <Route exact path="/products" element={<Products />} />
+          <Route path="/products/:keyword" element={<Products />} />
+          <Route exact path="/search" element={<Search />} />
+          <Route exact path="/password/forgot" element={<ForgotPassword />} />
+          <Route exact path="/cart" element={<Cart />} />
+          <Route
+            exact
+            path="/password/reset/:token"
+            element={<ResetPassword />}
+          />
+          <Route exact path="/login" element={<LoginSignUp />} />
+
+          <Route element={<ProtectedRoute isAdmin={false} />}>
+            <Route exact path="/account" element={<Profile />} />
+            <Route exact path="/me/update" element={<UpdateProfile />} />
+            <Route exact path="/password/update" element={<UpdatePassword />} />
+            <Route exact path="/shipping" element={<Shipping />} />
+            <Route exact path="/order/confirm" element={<ConfirmOrder />} />
+
+            {/* {stripeApiKey && (
+                <Route
+                  exact
+                  path="/process/payment"
+                  element={<Payment />}
+                ></Route>
+              )} */}
+
+            {stripeApiKey && (
               <Route
                 exact
                 path="/process/payment"
-                element={<Payment />}
+                element={
+                  <Elements stripe={loadStripe(stripeApiKey)}>
+                    <Payment />
+                  </Elements>
+                }
               ></Route>
-              <Route exact path="/success" element={<OrderSuccess />}></Route>
-              <Route exact path="/orders" element={<MyOrders />}></Route>
-              <Route exact path="/order/:id" element={<OrderDetails />}></Route>
-            </Route>
-            {/* Admin Routes */}
-            <Route element={<ProtectedRoute isAdmin={true} />}>
-              <Route
-                exact
-                path="/admin/dashboard"
-                element={<Dashboard />}
-              ></Route>
-              <Route
-                exact
-                path="/admin/products"
-                element={<ProductList />}
-              ></Route>
-              <Route
-                exact
-                path="/admin/product"
-                element={<NewProduct />}
-              ></Route>
-              <Route
-                exact
-                path="/admin/product/:id"
-                element={<UpdateProduct />}
-              ></Route>
-            </Route>
-          </Routes>
-        )}
-      </Elements>
+            )}
+
+            <Route exact path="/success" element={<OrderSuccess />}></Route>
+            <Route exact path="/orders" element={<MyOrders />}></Route>
+            <Route exact path="/order/:id" element={<OrderDetails />}></Route>
+          </Route>
+          {/* Admin Routes */}
+          <Route element={<ProtectedRoute isAdmin={true} />}>
+            <Route
+              exact
+              path="/admin/dashboard"
+              element={<Dashboard />}
+            ></Route>
+            <Route
+              exact
+              path="/admin/products"
+              element={<ProductList />}
+            ></Route>
+            <Route exact path="/admin/product" element={<NewProduct />}></Route>
+            <Route
+              exact
+              path="/admin/product/:id"
+              element={<UpdateProduct />}
+            ></Route>
+            <Route exact path="/admin/orders" element={<OrderList />}></Route>
+            <Route
+              exact
+              path="/admin/order/:id"
+              element={<ProcessOrder />}
+            ></Route>
+          </Route>
+        </Routes>
+      )}
       <Footer />
     </Router>
   );

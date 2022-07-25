@@ -9,8 +9,11 @@
   padding: 0;
 }
 .sidebar > a > img {
-  width: 100%;
+  width: 50%;
   transition: all 0.5s;
+  margin-left: 20%;
+  margin-top: 20%;
+  border-radius: 100%;
 }
 
 .sidebar > a > img:hover {

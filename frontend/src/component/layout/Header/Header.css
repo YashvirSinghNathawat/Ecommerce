@@ -8,6 +8,14 @@
   height: 56px;
   border-radius: 100%;
 }
+.logoReactNavbar {
+  border-radius: 100%;
+  transition: all 0.5s;
+}
+.logoReactNavbar:hover {
+  border-radius: 1px solid tomato;
+}
+
 @media screen and (max-width: 600px) {
   .speedDial {
     right: 5vmax;
