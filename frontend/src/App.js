@@ -21,7 +21,9 @@ import Cart from "./component/Cart/Cart.js";
 import OrderSuccess from "./component/Cart/OrderSuccess.js";
 import MyOrders from "./component/Order/MyOrders.js";
 import OrderDetails from "./component/Order/OrderDetails.js";
-import Dashboard from "./component/admin/Dashboard.js";
+import Dashboard from "./component/Admin/Dashboard.js";
+import ProductList from "./component/Admin/ProductList.js";
+import UpdateProduct from "./component/Admin/UpdateProduct.js";
 
 import store from "./store";
 import UserOptions from "./component/layout/Header/UserOptions.js";
@@ -31,6 +33,7 @@ import ProtectedRoute from "./component/Route/ProtectedRoute";
 import axios from "axios";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import NewProduct from "./component/Admin/NewProduct";
 
 function App() {
   const { isAuthenticated, user, loading } = useSelector((state) => state.user);
@@ -58,22 +61,23 @@ function App() {
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
       <Elements stripe={stripePromise}>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/product/:id" element={<ProductDetails />} />
-          <Route exact path="/products" element={<Products />} />
-          <Route path="/products/:keyword" element={<Products />} />
-          <Route exact path="/search" element={<Search />} />
-          <Route exact path="/password/forgot" element={<ForgotPassword />} />
-          <Route exact path="/cart" element={<Cart />} />
-          <Route
-            exact
-            path="/password/reset/:token"
-            element={<ResetPassword />}
-          />
-          <Route exact path="/login" element={<LoginSignUp />} />
-          {loading === false && (
-            <Route element={<ProtectedRoute />}>
+        {loading === false && (
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/product/:id" element={<ProductDetails />} />
+            <Route exact path="/products" element={<Products />} />
+            <Route path="/products/:keyword" element={<Products />} />
+            <Route exact path="/search" element={<Search />} />
+            <Route exact path="/password/forgot" element={<ForgotPassword />} />
+            <Route exact path="/cart" element={<Cart />} />
+            <Route
+              exact
+              path="/password/reset/:token"
+              element={<ResetPassword />}
+            />
+            <Route exact path="/login" element={<LoginSignUp />} />
+
+            <Route element={<ProtectedRoute isAdmin={false} />}>
               <Route exact path="/account" element={<Profile />} />
               <Route exact path="/me/update" element={<UpdateProfile />} />
               <Route
@@ -93,16 +97,32 @@ function App() {
               <Route exact path="/success" element={<OrderSuccess />}></Route>
               <Route exact path="/orders" element={<MyOrders />}></Route>
               <Route exact path="/order/:id" element={<OrderDetails />}></Route>
-
-              {/* Admin Routes */}
+            </Route>
+            {/* Admin Routes */}
+            <Route element={<ProtectedRoute isAdmin={true} />}>
               <Route
                 exact
                 path="/admin/dashboard"
                 element={<Dashboard />}
               ></Route>
+              <Route
+                exact
+                path="/admin/products"
+                element={<ProductList />}
+              ></Route>
+              <Route
+                exact
+                path="/admin/product"
+                element={<NewProduct />}
+              ></Route>
+              <Route
+                exact
+                path="/admin/product/:id"
+                element={<UpdateProduct />}
+              ></Route>
             </Route>
-          )}
-        </Routes>
+          </Routes>
+        )}
       </Elements>
       <Footer />
     </Router>

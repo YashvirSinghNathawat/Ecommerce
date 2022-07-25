@@ -1,10 +1,8 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import "./ConfirmOrder.css";
-import { useSelector, useDispatch } from "react-redux";
-import { saveShippingInfo } from "../../actions/cartAction";
+import { useSelector } from "react-redux";
 import MetaData from "../layout/MetaData";
 
-import { useAlert } from "react-alert";
 import { useNavigate, Link } from "react-router-dom";
 import CheckoutSteps from "./CheckoutSteps";
 import { Typography } from "@material-ui/core";
