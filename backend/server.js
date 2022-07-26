@@ -1,5 +1,4 @@
 const app = require("./app");
-const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/database");
 // Handling Uncaught Exception = console.log(youtube);
@@ -9,8 +8,9 @@ process.on("uncaughtException", (err) => {
   process.exit(1);
 });
 
-// Config
-dotenv.config({ path: "backend/config/config.env" });
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "backend/config/config.env" });
+}
 
 // Connect to Database
 connectDatabase();

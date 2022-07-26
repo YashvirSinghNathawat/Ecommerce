@@ -1,10 +1,43 @@
-# Ecommerce
+# EZGames
 
-Packages used
+Hi! My name is **Yashvir Singh**, I have created this store where we can buy popular games.
 
-1. bcryptjs = While submitting a form, there are some sensitive data (like passwords) that must not be visible to anyone, not even to the database admin. To avoid the sensitive data being visible from anyone, Node.js uses “bcryptjs”. This module enables storing of passwords as hashed passwords instead of plaintext.
-2. jsonwebtoken = encrypt json for secure communication between two parties
-3. validator = A library of string validators and sanitizers.
-4. nodemailer = Nodemailer is a module for Node.js applications to allow easy as cake email sending.
-5. cookie-parser = Parse Cookie header and populate req.cookies with an object keyed by the cookie names. Optionally you may enable signed cookie support by passing a secret string, which assigns req.secret so it may be used by other middleware
-6. body-parser = Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+# Technologies Used
+
+1.  HTML + CSS + JavaScript
+2.  Node
+3.  React
+4.  Express
+5.  MongoDB
+
+# Install Dependencies
+
+**For Backend** - `npm i`
+
+**For Frontend** - `cd frontend` ` npm i`
+
+## Env Variables
+
+Make Sure to Create a config.env file in backend/config directory and add appropriate variables in order to use the app.
+
+**Essential Variables**
+PORT=
+DB*URI =
+STRIPE_API_KEY=
+STRIPE_SECRET_KEY=
+JWT_SECRET=
+JWT_EXPIRE=
+COOKIE_EXPIRE=
+SMPT_SERVICE =
+SMPT_MAIL=
+SMPT_PASSWORD=
+SMPT_HOST=
+SMPT_PORT=
+CLOUDINARY_NAME
+CLOUDINARY_API_KEY
+CLOUDINARY_API_SECRET
+\_fill each filed with your info respectively*
+
+## Author
+
+**LinkedIn** Click [Here](www.linkedin.com/in/yashvir-singh-nathawat-119a93163)
