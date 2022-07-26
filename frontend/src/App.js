@@ -36,6 +36,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import NewProduct from "./component/Admin/NewProduct";
 import OrderList from "./component/Admin/OrderList";
 import ProcessOrder from "./component/Admin/ProcessOrder";
+import UsersList from "./component/Admin/UsersList";
+import UpdateUser from "./component/Admin/UpdateUser";
+import ProductReviews from "./component/Admin/ProductReviews";
 
 function App() {
   const { isAuthenticated, user, loading } = useSelector((state) => state.user);
@@ -132,6 +135,17 @@ function App() {
               exact
               path="/admin/order/:id"
               element={<ProcessOrder />}
+            ></Route>
+            <Route exact path="/admin/users" element={<UsersList />}></Route>
+            <Route
+              exact
+              path="/admin/user/:id"
+              element={<UpdateUser />}
+            ></Route>
+            <Route
+              exact
+              path="/admin/reviews"
+              element={<ProductReviews />}
             ></Route>
           </Route>
         </Routes>
