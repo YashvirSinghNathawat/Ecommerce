@@ -1,5 +1,8 @@
 .banner {
-  background-image: linear-gradient(to right, #635dc0, #3027ae);
+  background-image: url("../../images/cover.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 100vmin;
   display: flex;
   flex-direction: column;
@@ -11,12 +14,29 @@
 
 .banner > h1 {
   margin: 5vmax;
+  padding: 0.2vmax;
+  font: 600 2.5vmax "Helvetica";
+  border: 1px solid rgba(221, 128, 126, 0.654);
+  border-radius: 0.5vmax;
+  background-image: linear-gradient(to right, #decba4, #3e5151);
 
-  font: 600 2.5vmax "Roboto";
+  box-shadow: rgba(221, 128, 128, 0.657) 0px 54px 55px,
+    rgba(195, 108, 108, 0.527) 0px -12px 30px,
+    rgba(131, 75, 75, 0.609) 0px 4px 6px, rgba(129, 27, 27, 0.561) 0px 12px 13px,
+    rgba(185, 45, 45, 0.363) 0px -3px 5px;
 }
 
 .banner > p {
-  font: 300 1.4vmax "Lucida Sans";
+  font: 300 2vmax "Lucida Sans";
+  border: 1px solid rgba(221, 128, 126, 0.654);
+  border-image-slice: 1;
+  padding: 0.2vmax;
+  border-radius: 0.5vmax;
+  background-image: linear-gradient(to right, #decba4, #3e5151);
+  box-shadow: rgba(221, 128, 128, 0.657) 0px 54px 55px,
+    rgba(195, 108, 108, 0.527) 0px -12px 30px,
+    rgba(131, 75, 75, 0.609) 0px 4px 6px, rgba(129, 27, 27, 0.561) 0px 12px 13px,
+    rgba(185, 45, 45, 0.363) 0px -3px 5px;
 }
 
 .banner > a > button {

@@ -27,6 +27,7 @@ import UpdateProduct from "./component/Admin/UpdateProduct.js";
 
 import store from "./store";
 import UserOptions from "./component/layout/Header/UserOptions.js";
+import About from "./component/layout/About/About";
 import { loadUser } from "./actions/userAction";
 import { useSelector } from "react-redux";
 import ProtectedRoute from "./component/Route/ProtectedRoute";
@@ -39,6 +40,8 @@ import ProcessOrder from "./component/Admin/ProcessOrder";
 import UsersList from "./component/Admin/UsersList";
 import UpdateUser from "./component/Admin/UpdateUser";
 import ProductReviews from "./component/Admin/ProductReviews";
+import Contact from "./component/layout/Contact/Contact";
+import NotFound from "./component/layout/Not Found/NotFound";
 
 function App() {
   const { isAuthenticated, user, loading } = useSelector((state) => state.user);
@@ -59,6 +62,8 @@ function App() {
     store.dispatch(loadUser());
     getStripeApiKey();
   }, []);
+
+  window.addEventListener("contextmenu", (e) => e.preventDefault());
   return (
     // Components
     <Router>
@@ -72,6 +77,9 @@ function App() {
           <Route exact path="/products" element={<Products />} />
           <Route path="/products/:keyword" element={<Products />} />
           <Route exact path="/search" element={<Search />} />
+          <Route exact path="/contact" element={<Contact />} />
+          <Route exact path="/about" element={<About />} />
+
           <Route exact path="/password/forgot" element={<ForgotPassword />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route
@@ -148,6 +156,14 @@ function App() {
               element={<ProductReviews />}
             ></Route>
           </Route>
+          <Route
+            path="*"
+            element={
+              window.location.pathname === "/process/payment" ? null : (
+                <NotFound />
+              )
+            }
+          ></Route>
         </Routes>
       )}
       <Footer />

@@ -28,7 +28,7 @@ const Home = () => {
           {/* Fragment same as <></> */}
           <MetaData title="GAME STORE" />
           <div className="banner">
-            <p>Welcome to Ecommerce</p>
+            <p>Welcome to EZGames</p>
             <h1>FIND AMAZING PRODUCTS BELOW</h1>
 
             <a href="#container">
@@ -41,7 +41,7 @@ const Home = () => {
           <div className="container" id="container">
             {products &&
               products.map((product) => (
-                <ProductCard key={product} product={product} />
+                <ProductCard key={product._id} product={product} />
               ))}
           </div>
         </Fragment>
